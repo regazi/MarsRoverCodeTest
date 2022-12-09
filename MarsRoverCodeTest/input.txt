@@ -1,0 +1,17 @@
+5 5
+1 3 N
+MMMMLMMMM
+2 3 E
+MRMRMMMMM
+
+
+
+grid(boundaries)
+Rover1(initial postion)
+Rover2(initial postion)
+Rover1.Move(commands, grid{boundaries}, rover2.postiton)
+Rover2.Move(commands, grid{boundaries}, rover1.position)
+
+print final positions
+
+

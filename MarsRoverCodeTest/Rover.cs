@@ -77,98 +77,155 @@ namespace MarsRoverCodeTest
                     throw new ArgumentException();
             }
         }
-        //Check X Boundary
-        public bool AtEdgeOfGridX(int[] boundary)
+        //EDGE CASE---- Rovers should not be able to pass through oneanother, "WillNotCollide" shoudl handle that by passing on the right side
+        //      // EDGE CASE---- this creates another edge case if one rover is at edge of grid. 
+        //Currently Not working. Will fix either after food, or tomorrow morning
+        public bool WillNotCollide(Grid grid, Rover rover)
         {
-          if(X == boundary[0] || X == 0)
+            if(Direction == 'N' && Y + 1 == rover.Y)
             {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-        //Check Y Boundary
-        public bool AtEdgeOfGridY(int[] boundary)
-        {
-            if (Y == boundary[1] || Y == 0)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-        //Logic to determin what direction to turn when encountering boundary 
-        public void CheckBoundariesThenMove(int[] boundary)
-        {
-            if(Direction == 'N' && AtEdgeOfGridY(boundary) == true)
-            {
-                if (X > boundary[0]/2)
-                {
-                    TurnLeft();
-                    Advance();
-                }
-                else
-                {
-                    TurnRight();
-                    Advance();
-                }
-            }
-            else if (Direction == 'S' && AtEdgeOfGridY(boundary) == true)
-            {
-
-                if (X > boundary[0] / 2)
-                {
-                    TurnRight();
-                    Advance();
-                }
-                else
-                {
-                    TurnLeft();
-                    Advance();
-                }
-            }
-            else if (Direction == 'E' && AtEdgeOfGridX(boundary) == true)
-            {
-                if (Y > boundary[1] / 2)
-                {
-                    TurnLeft();
-                    Advance();
-                }
-                else
-                {
-                    TurnRight();
-                    Advance();
-                }
-            }else if (Direction == 'W' && AtEdgeOfGridX(boundary) == true)
-            {
-                if (Y > boundary[1] / 2)
-                {
-                    TurnRight();
-                    Advance();
-                }
-                else
-                {
-                    TurnLeft();
-                    Advance();
-                }
-            }
-            else
-            {
+                TurnRight();
                 Advance();
+                TurnLeft();
+                Advance();
+                TurnLeft();
+                Advance();
+                TurnRight();
+                return true;
+
             }
+            else if (Direction == 'E' && X + 1 == rover.Y)
+            {
+                TurnLeft();
+                Advance();
+                TurnRight();
+                Advance();
+                TurnRight();
+                Advance();
+                TurnLeft();
+                return true;
+
+            }
+            else if (Direction == 'S' && Y - 1 == rover.Y)
+            {
+                TurnRight();
+                Advance();
+                TurnLeft();
+                Advance();
+                TurnLeft();
+                Advance();
+                TurnRight();
+                return true;
+
+            }
+            else if (Direction == 'W' && X - 1 == rover.Y)
+            {
+                TurnLeft();
+                Advance();
+                TurnRight();
+                Advance();
+                TurnRight();
+                Advance();
+                TurnLeft();
+                return true;
+
+            }
+            else
+            {
+                return true;
+            }
+        }  
+        private bool IsInBounds(Grid grid, Rover rover)
+        {
+            if (Direction == 'N')
+            {
+                if(Y == grid.Y)
+                {
+                    if(X> grid.X / 2)
+                    {
+                        TurnLeft();
+                        return true;
+                    }
+                    else
+                    {
+                        TurnRight();
+                        return true;
+                    }
+                }
+                else
+                {
+                    return true;
+                }
+            }
+            else if (Direction == 'E')
+            {
+                if (X  == grid.X)
+                {
+                    if (Y < grid.Y / 2)
+                    {
+                        TurnLeft();
+                        return true;
+                    }
+                    else
+                    {
+                        TurnRight();
+                        return true;
+                    }
+                }
+                else
+                {
+                    return true;
+                }
+            }
+            else if (Direction == 'S')
+            {
+                if (Y  == 0)
+                {
+                    if (X < grid.X / 2)
+                    {
+                        TurnLeft();
+                        return true;
+                    }
+                    else
+                    {
+                        TurnRight();
+                        return true;
+                    }
+                }
+                else
+                {
+                    return true;
+                }
+            }
+            else if (Direction == 'W')
+            {
+                if (X  == 0)
+                {
+                    if (Y > grid.Y / 2)
+                    {
+                        TurnLeft();
+                        return true;
+                    }
+                    else
+                    {
+                        TurnRight();
+                        return true;
+                    }
+                }
+                else
+                {
+                    return true;
+                }
+            }
+            else
+            {
+                throw new ArgumentException();
+            }
+
+
         }
 
-        /*
-        public void ObsticalInPath(int[] obstical)
-        {
-            if ()
-        }
-        */
-        public void Move(string commandsInput, int[] boundary) 
+        public void Move(string commandsInput, Grid grid, Rover rover) 
         {
             //take command input and cast to array
             char[] commands = commandsInput.ToCharArray();
@@ -185,7 +242,14 @@ namespace MarsRoverCodeTest
                 }
                 else if (c == 'M')
                 {
-                   CheckBoundariesThenMove(boundary);
+                if (IsInBounds(grid, rover))
+                    {
+                        Advance();
+                    }
+                    else
+                    {
+                        throw new ArgumentException();
+                    }
                 }
                 else
                 {

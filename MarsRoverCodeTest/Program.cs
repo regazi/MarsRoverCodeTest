@@ -1,16 +1,16 @@
-﻿// assumptions: The Rovers do not occupy space larger than a single grid coordinate.
+﻿// Assumptions: The Rovers do not occupy space larger than a single grid coordinate.
 //             Rovers can only move 1 gridpoint per move and only in oriented direction 
 //             Rovers can not occupy same grid coordinate
 //             If directed to go out-of-bounds, Rovers will turn in the direction with the most room and execute move in that direction
 
-//objects:     Rover
+// Objects:    Rover
 //             Grid
-//             Message
-//             Inputs: 1) Grid sizw------------------------[5 5]
-//                     2) Rover1 postion and orientation---[1 2 N]
-//                     3) Commands for Rover1--------------[LMLMLMLMM] 
-//                     4) Rover2 position and orientation--[3 3 E]
-//                     5) Comamnds for Rover2--------------[MMRMMRMRRM]
+//             
+// Inputs:     1) Grid size------------------------[5 5]
+//             2) Rover1 postion and orientation---[1 2 N]
+//             3) Commands for Rover1--------------[LMLMLMLMM]
+//             4) Rover2 position and orientation--[3 3 E]
+//             5) Comamnds for Rover2--------------[MMRMMRMRRM]
 
 
 using System.ComponentModel.Design;
@@ -21,28 +21,38 @@ namespace MarsRoverCodeTest
     {
         static void Main(string[] args)
         {
-            //test code bellow. this wil be redone. 
-            Console.WriteLine("Starting Postion");
-            string input = Console.ReadLine();
-            string[] startingPosition = input.Split(' ');
-            Console.WriteLine("enter grid size");
-            string[] boundInput = Console.ReadLine().Split(' ');
-            int[] boundary = new int [2];
-            boundary[0] = Int32.Parse(boundInput[0]) / 10;
-            boundary[1] = Int32.Parse(boundInput[1]) % 10;
-            Console.WriteLine("enter commands");
-            string commands = Console.ReadLine();
+            /*
+            List<string> input = (List<string>) File.ReadLines("input.txt")
+            if (input.Length < 5) {
+                throw Exception();
+            }
+             var boundaries = input[0]
+             var position_one = input[1]
+             var commands_one = input[2]
+             var position_two = input[3]
+             var commands_two = input[4]
 
-            Rover rover = new(startingPosition);
-            rover.Move(commands, boundary);
+             var grid = new Grid(boundaries[0])
+             var roverOne = new Rover(positionOne)
+             var roverTwo = new Rover(positionTwo)
+             
+            roverOne.Move(commands_one, grid, roverTwo)
+            roverTwo.Move(commands_two, grid, roverOne)
+            Console.WriteLine(roverOne.X, roverOne.Y, roverOne.Direction);
+            Console.WriteLine(roverTwo.X, roverTwo.Y, roverTwo.Direction);
+            . . .
 
-            Console.WriteLine(rover.X);
-            Console.WriteLine(rover.Y);
-            Console.WriteLine(rover.Direction);
-
-
+            
+            */
 
         }
 
     }
 }
+
+
+
+
+
+
+
