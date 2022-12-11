@@ -57,18 +57,18 @@ namespace MarsRoverCodeTest
                     throw new ArgumentException();
             }
         }
-        public void Advance()
+        public void MoveForward()
         {
             switch (Direction)
             {
                 case 'N':
-                    Y ++;
+                    Y++;
                     break;
                 case 'E':
                     X++;
                     break;
                 case 'S':
-                   Y--;
+                    Y--;
                     break;
                 case 'W':
                     X--;
@@ -77,56 +77,93 @@ namespace MarsRoverCodeTest
                     throw new ArgumentException();
             }
         }
-        //EDGE CASE---- Rovers should not be able to pass through oneanother, "WillNotCollide" shoudl handle that by passing on the right side
-        //      // EDGE CASE---- this creates another edge case if one rover is at edge of grid. 
-        //Currently Not working. Will fix either after food, or tomorrow morning
+
+        public void AdvanceSafely(Grid grid)
+        {
+            if(Direction == 'N' && IsInBounds(grid))
+            {
+                MoveForward();
+            }
+            else if (Direction == 'E' && IsInBounds(grid))
+            {
+                MoveForward();
+            }
+            else if (Direction == 'S' && IsInBounds(grid))
+            {
+                MoveForward();
+            }
+            else if (Direction == 'W' && IsInBounds(grid))
+            {
+                MoveForward();
+            }
+
+
+
+
+            /*
+
+            
+            */
+        }
         public bool WillNotCollide(Grid grid, Rover rover)
         {
-            if(Direction == 'N' && Y + 1 == rover.Y)
+            if(Direction == 'N' && X == rover.X && Y + 1 == rover.Y)
             {
+              
                 TurnRight();
-                Advance();
+                AdvanceSafely(grid);
                 TurnLeft();
-                Advance();
+                AdvanceSafely(grid);
+                AdvanceSafely(grid);
                 TurnLeft();
-                Advance();
+                AdvanceSafely(grid);
                 TurnRight();
+              
                 return true;
 
             }
-            else if (Direction == 'E' && X + 1 == rover.Y)
+            else if (Direction == 'E' && Y == rover.Y && X + 1 == rover.Y)
             {
+               
                 TurnLeft();
-                Advance();
+                AdvanceSafely(grid);
                 TurnRight();
-                Advance();
+                AdvanceSafely(grid);
+                AdvanceSafely(grid);
                 TurnRight();
-                Advance();
+                AdvanceSafely(grid);
                 TurnLeft();
+                
                 return true;
 
             }
-            else if (Direction == 'S' && Y - 1 == rover.Y)
+            else if (Direction == 'S' && X == rover.X && Y - 1 == rover.Y )
             {
+               
                 TurnRight();
-                Advance();
+                AdvanceSafely(grid);
                 TurnLeft();
-                Advance();
+                AdvanceSafely(grid);
+                AdvanceSafely(grid);
                 TurnLeft();
-                Advance();
+                AdvanceSafely(grid);
                 TurnRight();
+               
                 return true;
 
             }
-            else if (Direction == 'W' && X - 1 == rover.Y)
+            else if (Direction == 'W' && Y == rover.Y && X - 1 == rover.Y)
             {
+               
                 TurnLeft();
-                Advance();
+                AdvanceSafely(grid);
                 TurnRight();
-                Advance();
+                AdvanceSafely(grid);
+                AdvanceSafely(grid);
                 TurnRight();
-                Advance();
+                AdvanceSafely(grid);
                 TurnLeft();
+            
                 return true;
 
             }
@@ -135,11 +172,11 @@ namespace MarsRoverCodeTest
                 return true;
             }
         }  
-        private bool IsInBounds(Grid grid, Rover rover)
+        private bool IsInBounds(Grid grid)
         {
             if (Direction == 'N')
             {
-                if(Y == grid.Y)
+                if(Y == grid.Y )
                 {
                     if(X> grid.X / 2)
                     {
@@ -159,7 +196,7 @@ namespace MarsRoverCodeTest
             }
             else if (Direction == 'E')
             {
-                if (X  == grid.X)
+                if (X  == grid.X )
                 {
                     if (Y < grid.Y / 2)
                     {
@@ -179,7 +216,7 @@ namespace MarsRoverCodeTest
             }
             else if (Direction == 'S')
             {
-                if (Y  == 0)
+                if (Y  == 0 )
                 {
                     if (X < grid.X / 2)
                     {
@@ -199,7 +236,7 @@ namespace MarsRoverCodeTest
             }
             else if (Direction == 'W')
             {
-                if (X  == 0)
+                if (X  == 0 )
                 {
                     if (Y > grid.Y / 2)
                     {
@@ -240,16 +277,13 @@ namespace MarsRoverCodeTest
                 {
                     TurnRight();
                 }
-                else if (c == 'M')
+                else if (c == 'M' && WillNotCollide(grid, rover))
                 {
-                if (IsInBounds(grid, rover))
-                    {
-                        Advance();
-                    }
-                    else
-                    {
-                        throw new ArgumentException();
-                    }
+
+
+                    AdvanceSafely(grid);
+
+
                 }
                 else
                 {
