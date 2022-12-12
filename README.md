@@ -9,7 +9,7 @@ Assumptions:
 2) Rovers can only move 1 gridpoint per move and only in oriented direction 
 3) Rovers can not occupy same grid coordinate
 4) If directed to go out-of-bounds, Rovers will turn in the direction with the most room and execute move in that direction
-5) If rover's next move is blocked by other rover, it will safely (see above) pass around it before executing move. 
+5) If rover's next move is blocked by other rover, it will safely (see #4) pass around it before executing move. 
 
 Commands: L (turn left 90*), R (turn right 90*), M (move forward one grid point)
 
