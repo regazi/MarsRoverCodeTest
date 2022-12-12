@@ -24,7 +24,7 @@ namespace MarsRoverCodeTest
         static void Main(string[] args)
         {
 
-            string[] input = File.ReadLines("C:\\Users\\Partakers\\source\\repos\\MarsRoverCodeTest\\MarsRoverCodeTest\\input.txt").ToArray();
+            string[] input = File.ReadLines("./input.txt").ToArray();
             
             if (input.Length<5) {
                 throw new Exception();
