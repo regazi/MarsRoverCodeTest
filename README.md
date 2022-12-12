@@ -13,6 +13,8 @@ Assumptions:
 
 Commands: L (turn left 90*), R (turn right 90*), M (move forward one grid point)
 
+Input: "input.txt"
+
 TEST INPUT
 5 5
 1 2 N
