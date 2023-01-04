@@ -120,7 +120,7 @@ namespace MarsRoverUnitTest
             rover1.Move(commands1, grid, rover2);
             rover2.Move(commands2, grid, rover1);
             //assertion
-            Assert.True(rover1.X == 3 && rover1.Y == 5 && rover1.Direction == 'N' && rover2.X == 5 && rover2.Y == 2 && rover2.Direction == 'S');
+            Assert.True(rover1.X == 3 && rover1.Y == 4 && rover1.Direction == 'N' && rover2.X == 5 && rover2.Y == 2 && rover2.Direction == 'S');
         }
     }
    

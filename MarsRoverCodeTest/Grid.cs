@@ -17,8 +17,13 @@ namespace MarsRoverCodeTest
             X = boundaries[0];
             Y = boundaries[1];                   
         }
+        public Grid(int boundaryXY)
+        {
+            X = boundaryXY;
+            Y = boundaryXY;
+        }
 
-     }
+    }
                
 
 }

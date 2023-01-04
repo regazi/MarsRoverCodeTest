@@ -97,14 +97,11 @@ namespace MarsRoverCodeTest
                 MoveForward();
             }
 
-
-
-
-            /*
-
-            
-            */
         }
+
+        //Here I am changing the smarth pathing the return false after navigating around an obstruction
+        //before, the "M" would execute after the smart pathing already advance passed the obstruction, adding an extra move
+        //now it just "break"s
         public bool WillNotCollide(Grid grid, Rover rover)
         {
             if(Direction == 'N' && X == rover.X && Y + 1 == rover.Y)
@@ -119,7 +116,7 @@ namespace MarsRoverCodeTest
                 AdvanceSafely(grid);
                 TurnRight();
               
-                return true;
+                return false;
 
             }
             else if (Direction == 'E' && Y == rover.Y && X + 1 == rover.Y)
@@ -134,7 +131,7 @@ namespace MarsRoverCodeTest
                 AdvanceSafely(grid);
                 TurnLeft();
                 
-                return true;
+                return false;
 
             }
             else if (Direction == 'S' && X == rover.X && Y - 1 == rover.Y )
@@ -149,7 +146,7 @@ namespace MarsRoverCodeTest
                 AdvanceSafely(grid);
                 TurnRight();
                
-                return true;
+                return false;
 
             }
             else if (Direction == 'W' && Y == rover.Y && X - 1 == rover.Y)
@@ -164,7 +161,7 @@ namespace MarsRoverCodeTest
                 AdvanceSafely(grid);
                 TurnLeft();
             
-                return true;
+                return false;
 
             }
             else
@@ -277,12 +274,16 @@ namespace MarsRoverCodeTest
                 {
                     TurnRight();
                 }
-                else if (c == 'M' && WillNotCollide(grid, rover))
+                else if (c == 'M')
                 {
-
-
-                    AdvanceSafely(grid);
-
+                    if ( WillNotCollide(grid, rover) == true)
+                    {
+                        AdvanceSafely(grid);
+                    }
+                    else
+                    {
+                        break;
+                    }
 
                 }
                 else

@@ -36,9 +36,11 @@ namespace MarsRoverCodeTest
             var position_two = input[3];
             var commands_two = input[4];
 
-            int[] boundaries = new Int32[2] {Int32.Parse(stringBoundaries[0]), Int32.Parse(stringBoundaries[0]) };
+            //  int[] boundaries = new Int32[2] {Int32.Parse(stringBoundaries[0]), Int32.Parse(stringBoundaries[0]) };
+            int boundaryXY= Int32.Parse(stringBoundaries[0]);
 
-            var grid = new Grid(boundaries);
+            // var grid = new Grid(boundaries);
+            var grid = new Grid(boundaryXY);
             var roverOne = new Rover(position_one.Split(' '));
             var roverTwo = new Rover(position_two.Split(' '));
 
